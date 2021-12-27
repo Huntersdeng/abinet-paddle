@@ -1,0 +1,16 @@
+Global:
+  max_length: 25
+  character_dict_path: charset_36.txt
+
+Architecture:
+  d_model: 512
+  nhead: 8
+  d_inner: 2048
+  dropout: 0.1
+  activation: 'relu'
+  iter_size: 3
+  Vision:
+    num_layers: 3
+  Language:
+    num_layers: 4
+    detach: True

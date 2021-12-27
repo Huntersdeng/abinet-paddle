@@ -1,0 +1,11 @@
+CANDY.png	candy
+ESPLANADE.png	esplanade
+GLOBE.png	globe
+KAPPA.png	kappa
+MANDARIN.png	mandarin
+MEETS.png	meets
+MONTHLY.png	monthly
+RESTROOM.png	restroom
+cinerama.jpg	cinerama
+football.jpg	football
+manchester.jpg	mancheeter
