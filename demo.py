@@ -17,7 +17,7 @@ state = paddle.load('pretrain_models/pretrain_alignment.pdparams')
 model.alignment.load_dict(state)
 model.eval()
 
-paths = [os.path.join('./figs', fname) for fname in os.listdir('./figs')]
+paths = [os.path.join('./figs/test', fname) for fname in os.listdir('./figs/test')]
 paths = sorted(paths)
 for im_path in paths:
     img = Image.open(im_path).convert('RGB')
