@@ -8,11 +8,11 @@ Global:
   # evaluation is run every 2000 iterations
   eval_batch_step: [0, 2000]
   cal_metric_during_train: True
-  pretrained_model: /home/dengguowei/Documents/ocr-project/abinet-paddle/pretrain_models/rec_r45_abinet
+  pretrained_model: ./pretrain_models/rec_r45_abinet
   checkpoints:
   save_inference_dir: ./
   use_visualdl: False
-  infer_img: doc/imgs_words_en/word_10.png
+  infer_img: ./figs/test/football.jpg
   # for data or label process
   character_dict_path: ppocr/utils/dict36.txt
   max_text_length: &max_length 25
@@ -99,8 +99,8 @@ Train:
 Eval:
   dataset:
     name: LMDBDataSet
-    data_dir: /home/dengguowei/Dataset/rec/IC15_1811
-    label_file_list: ["/home/dengguowei/Documents/ocr-project/abinet-paddle/figs/val.txt"]
+    data_dir: ./Dataset/rec/IC15_1811
+    label_file_list: 
     transforms:
       - DecodeImage: # load image
           img_mode: RGB
