@@ -54,18 +54,3 @@ class Model(nn.Layer):
     #     if fw: mask = mask.transpose((1, 0))
     #     mask = mask.float().masked_fill(mask == 0, float('-inf')).masked_fill(mask == 1, float(0.0))
     #     return mask
-
-    @staticmethod
-    def _get_mask(lengths, max_length):
-        masks = []
-        for length in lengths:
-            N = int(length)
-            location_mask = -paddle.eye(max_length) > -1
-            padding_mask = paddle.zeros((max_length,max_length))
-            padding_mask[:N,:N] = 1
-            padding_mask = padding_mask > 0
-            mask = location_mask & padding_mask
-            mask = (paddle.cast(mask, paddle.float32) - 1.0) * 1e9
-            masks.append(mask)
-        masks = paddle.stack(masks)
-        return masks
