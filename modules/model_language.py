@@ -2,9 +2,7 @@ import paddle
 import paddle.nn as nn
 
 from .model import Model
-from .transformer import (PositionalEncoding, 
-                         TransformerDecoder,
-                         TransformerDecoderLayer)
+from .transformer import PositionalEncoding, BCNModel,BCNLayer
 
 class BCNLanguage(Model):
     def __init__(self, config):
@@ -22,8 +20,8 @@ class BCNLanguage(Model):
         self.project = nn.Linear(self.charset.num_classes, self.d_model, bias_attr=False)
         self.token_encoder = PositionalEncoding(self.d_model, max_len=self.max_length)
         self.pos_encoder = PositionalEncoding(self.d_model, dropout=0, max_len=self.max_length)
-        decoder_layer = TransformerDecoderLayer(**cfg_language)
-        self.model = TransformerDecoder(decoder_layer, self.num_layers)
+        decoder_layer = BCNLayer(**cfg_language)
+        self.model = BCNModel(decoder_layer, self.num_layers)
 
         self.cls = nn.Linear(self.d_model, self.charset.num_classes)
 
@@ -49,6 +47,21 @@ class BCNLanguage(Model):
 
         res =  {'feature': output, 'logits': logits, 'pt_lengths': pt_lengths}
         return res
+
+    @staticmethod
+    def _get_mask(lengths, max_length):
+        masks = []
+        for length in lengths:
+            N = int(length)
+            location_mask = -paddle.eye(max_length) > -1
+            padding_mask = paddle.zeros((max_length,max_length))
+            padding_mask[:N,:N] = 1
+            padding_mask = padding_mask > 0
+            mask = location_mask & padding_mask
+            mask = (paddle.cast(mask, paddle.float32) - 1.0) * 1e9
+            masks.append(mask)
+        masks = paddle.stack(masks)
+        return masks
 
 if __name__=='__main__':
     import yaml, paddle

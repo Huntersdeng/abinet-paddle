@@ -1,6 +1,6 @@
 Global:
   max_length: 25
-  character_dict_path: dict36.txt
+  character_dict_path: charset_36.txt
 
 Architecture:
   d_model: 512

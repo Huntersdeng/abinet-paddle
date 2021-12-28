@@ -112,25 +112,12 @@ class TransformerEncoderLayer(Layer):
         
         return src
 
-class TransformerDecoder(Layer):
-    r"""TransformerDecoder is a stack of N decoder layers
+class BCNModel(Layer):
 
-    Args:
-        decoder_layer: an instance of the TransformerDecoderLayer() class (required).
-        num_layers: the number of sub-decoder-layers in the decoder (required).
-        norm: the layer normalization component (optional).
-
-    Examples::
-        >>> decoder_layer = nn.TransformerDecoderLayer(d_model=512, nhead=8)
-        >>> transformer_decoder = nn.TransformerDecoder(decoder_layer, num_layers=6)
-        >>> memory = torch.rand(10, 32, 512)
-        >>> tgt = torch.rand(20, 32, 512)
-        >>> out = transformer_decoder(tgt, memory)
-    """
     __constants__ = ['norm']
 
     def __init__(self, decoder_layer, num_layers, norm=None):
-        super(TransformerDecoder, self).__init__()
+        super(BCNModel, self).__init__()
         self.layers = get_clones(decoder_layer, num_layers)
         self.num_layers = num_layers
         self.norm = norm
@@ -159,31 +146,11 @@ class TransformerDecoder(Layer):
 
         return output
 
-class TransformerDecoderLayer(Layer):
-    r"""TransformerDecoderLayer is made up of self-attn, multi-head-attn and feedforward network.
-    This standard decoder layer is based on the paper "Attention Is All You Need".
-    Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez,
-    Lukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. In Advances in
-    Neural Information Processing Systems, pages 6000-6010. Users may modify or implement
-    in a different way during application.
-
-    Args:
-        d_model: the number of expected features in the input (required).
-        nhead: the number of heads in the multiheadattention models (required).
-        d_inner: the dimension of the feedforward network model (default=2048).
-        dropout: the dropout value (default=0.1).
-        activation: the activation function of intermediate layer, relu or gelu (default=relu).
-
-    Examples::
-        >>> decoder_layer = nn.TransformerDecoderLayer(d_model=512, nhead=8)
-        >>> memory = torch.rand(10, 32, 512)
-        >>> tgt = torch.rand(20, 32, 512)
-        >>> out = decoder_layer(tgt, memory)
-    """
+class BCNLayer(Layer):
 
     def __init__(self, d_model, nhead, d_inner=2048, dropout=0.1, 
                  activation="relu", **kwargs):
-        super(TransformerDecoderLayer, self).__init__()
+        super(BCNLayer, self).__init__()
         # if self.has_self_attn:
         #     self.self_attn = MultiHeadAttention(d_model, nhead, dropout=dropout)
         #     self.norm1 = LayerNorm(d_model)
@@ -204,7 +171,7 @@ class TransformerDecoderLayer(Layer):
     def __setstate__(self, state):
         if 'activation' not in state:
             state['activation'] = F.relu
-        super(TransformerDecoderLayer, self).__setstate__(state)
+        super(BCNLayer, self).__setstate__(state)
 
     def forward(self, tgt, memory, memory_mask=None):
         """Pass the inputs (and mask) through the decoder layer.
