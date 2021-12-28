@@ -8,6 +8,8 @@ import string
 from shapely.geometry import LineString, Point, Polygon
 import json
 
+from ppocr.utils.logging import get_logger
+
 class BaseRecLabelEncode(object):
     """ Convert between text-label and text-index """
 
