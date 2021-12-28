@@ -16,7 +16,7 @@ import copy
 import importlib
 
 from .base_model import BaseModel
-# from .distillation_model import DistillationModel
+from .distillation_model import DistillationModel
 
 __all__ = ['build_model']
 
