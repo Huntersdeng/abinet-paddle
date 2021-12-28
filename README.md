@@ -14,7 +14,9 @@ A paddle implementation for [**ABINet**](https://arxiv.org/abs/2103.06495) (CVPR
 ```
 
 ## 1. 简介
-ABINet使用一个视觉模型和一个显示语言模型来识别场景文字，并且可以端到端地训练。语言模型（BCN）模拟了完形填空式的双向语言模型。另外，该语言模型使用了迭代式的文本修正策略。
+- ABINet使用一个视觉模型和一个显示语言模型来识别场景文字，并且可以端到端地训练。语言模型（BCN）模拟了完形填空式的双向语言模型。另外，该语言模型使用了迭代式的文本修正策略。
+
+- 本项目基于[**PaddleOCR**](https://github.com/PaddlePaddle/PaddleOCR)复现，利用其中丰富的OCR相关工具大大减小了项目复现的难度。复现过程中代码参考了[**ABINet**](https://github.com/FangShancheng/ABINet)中的实现，提高了本repo复现论文的效率。在此表示感谢。
 
 <img src="figs/doc/overview.bmp" style="height:300;">
 
@@ -54,6 +56,6 @@ Evaluation datasets, LMDB datasets can be downloaded from [BaiduNetdisk(passwd:1
 
         python tools/eval.py -c configs/rec/rec_r45_abinet.yml -o Global.pretrained_model='your model path'
 
-  * **模型推断并可视化结果:**（需要在配置文件中将“infer_img”字段修改为预测图片的路径）
+* **模型推断并可视化结果:**（需要在配置文件中将“infer_img”字段修改为预测图片的路径）
 
         python tools/infer_rec.py -c configs/rec/rec_r45_abinet.yml -o Global.pretrained_model='your model path'
