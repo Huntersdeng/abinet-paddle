@@ -30,6 +30,8 @@ Evaluation datasets, LMDB datasets can be downloaded from [BaiduNetdisk(passwd:1
     5. Street View Text-Perspective (SVTP)
     6. CUTE80 (CUTE)
 
+paddle版本模型使用的权重是基于[**ABINet**](https://github.com/FangShancheng/ABINet)提供的权重转化而来。[**下载链接**](https://pan.baidu.com/s/1zzvfIOfiUsR9zl-P9h0_RQ)（提取码：b83l）
+
 |IC13|SVT|IIIT|IC15|SVTP|CUTE|AVG|
 |-|-|-|-|-|-|-|
 |97.0|93.4|96.4|85.9|89.5|89.2|92.7|## 3. 开始使用
