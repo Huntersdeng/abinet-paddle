@@ -1,7 +1,7 @@
 import paddle
 import paddle.nn as nn
 from paddle.nn import functional as F
-from transformer import PositionalEncoding
+from .transformer import PositionalEncoding
 
 class Attention(nn.Layer):
     def __init__(self, in_channels=512, max_length=25, n_feature=256):

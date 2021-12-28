@@ -3,7 +3,7 @@ import paddle.nn as nn
 
 from paddle.nn import functional as F
 
-from utils import CharsetMapper
+from .utils import CharsetMapper
 
 
 class Model(nn.Layer):

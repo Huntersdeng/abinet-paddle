@@ -1,8 +1,8 @@
 import paddle
 import paddle.nn as nn
 
-from resnet import resnet45
-from transformer import (PositionalEncoding,
+from .resnet import resnet45
+from .transformer import (PositionalEncoding,
                          TransformerEncoder,
                          TransformerEncoderLayer)
 

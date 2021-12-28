@@ -2,9 +2,9 @@ import logging
 
 from paddle.nn import Linear
 
-from model import Model
-from backbone import ResTranformer
-from attention import PositionAttention
+from .model import Model
+from .backbone import ResTranformer
+from .attention import PositionAttention
 
 
 class BaseVision(Model):

@@ -2,10 +2,10 @@ import paddle
 import paddle.nn as nn
 import paddle.nn.functional as F
 
-from model import Model
-from model_vision import BaseVision
-from model_language import BCNLanguage
-from model_alignment import BaseAlignment
+from .model import Model
+from .model_vision import BaseVision
+from .model_language import BCNLanguage
+from .model_alignment import BaseAlignment
 
 class ABINetModel(Model):
     def __init__(self, config):

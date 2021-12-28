@@ -2,10 +2,10 @@ import paddle
 import paddle.nn as nn
 import paddle.nn.functional as F
 
-from model import Model
-from model_vision import BaseVision
-from model_language import BCNLanguage
-from model_alignment import BaseAlignment
+from .model import Model
+from .model_vision import BaseVision
+from .model_language import BCNLanguage
+from .model_alignment import BaseAlignment
 
 class ABINetIterModel(Model):
     def __init__(self, config):
@@ -31,29 +31,3 @@ class ABINetIterModel(Model):
             return all_a_res, all_l_res, v_res
         else:
             return a_res, all_l_res[-1], v_res
-
-if __name__=='__main__':
-    import yaml, paddle, os, glob
-    from PIL import Image
-    from utils import preprocess
-    device = 'gpu:0'
-    device = paddle.set_device(device)
-    with open('./configs/abinet.yml', 'r') as f:
-        cfg = yaml.load(f, Loader=yaml.FullLoader)
-    model = ABINetIterModel(cfg)
-    state = paddle.load('pretrain_models/pretrain_vm.pdparams')
-    model.vision.load_dict(state)
-    state = paddle.load('pretrain_models/pretrain_lm.pdparams')
-    model.language.load_dict(state)
-    state = paddle.load('pretrain_models/pretrain_alignment.pdparams')
-    model.alignment.load_dict(state)
-    model.eval()
-
-    paths = [os.path.join('./figs', fname) for fname in os.listdir('./figs')]
-    paths = sorted(paths)
-    for im_path in paths:
-        img = Image.open(im_path).convert('RGB')
-        img = paddle.to_tensor(preprocess(img, 128 ,32)).unsqueeze(0)
-        out, _, _ = model(img)
-        pt_text, pt_scores, pt_lengths = model._get_text(out['logits'])
-        print(f'{im_path}: {pt_text[0]}')

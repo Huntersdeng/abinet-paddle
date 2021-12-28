@@ -4,7 +4,7 @@ import paddle.nn.functional as F
 from paddle.nn import (Dropout, LayerNorm, Linear, 
                       Layer, Sequential, Upsample,
                       Conv2D, ReLU, BatchNorm2D)
-from utils import get_activation_fn, get_clones
+from .utils import get_activation_fn, get_clones
 
 
 class TransformerEncoder(Layer):

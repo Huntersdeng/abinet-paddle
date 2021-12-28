@@ -1,8 +1,8 @@
 import paddle
 import paddle.nn as nn
 
-from model import Model
-from transformer import (PositionalEncoding, 
+from .model import Model
+from .transformer import (PositionalEncoding, 
                          TransformerDecoder,
                          TransformerDecoderLayer)
 

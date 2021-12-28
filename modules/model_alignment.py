@@ -2,7 +2,7 @@ import paddle
 import paddle.nn as nn
 import paddle.nn.functional as F
 
-from model import Model
+from .model import Model
 
 class BaseAlignment(Model):
     def __init__(self, config):
